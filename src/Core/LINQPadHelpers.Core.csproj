@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="Version.proj" />
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <RootNamespace>LINQPadHelpers</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Version.proj" />
+  </ItemGroup>
+
+</Project>
