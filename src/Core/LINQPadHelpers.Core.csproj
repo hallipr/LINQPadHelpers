@@ -2,12 +2,22 @@
   <Import Project="Version.proj" />
 
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net462</TargetFramework>
     <RootNamespace>LINQPadHelpers</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="Version.proj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LINQPad" Version="5.26.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\pahallis\.nuget\packages\newtonsoft.json\10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

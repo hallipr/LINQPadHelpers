@@ -53,22 +53,22 @@ namespace LINQPadHelpers.AzureRm
                 }
             }
 
-            if (!credentialsCache.ContainsKey(tokenAudience))
+            if (!this.credentialsCache.ContainsKey(tokenAudience))
             {
                 var clientSettings = new ActiveDirectoryClientSettings
                 {
                     ClientId = WellKnownClientId,
-                    ClientRedirectUri = new System.Uri("urn:ietf:wg:oauth:2.0:oob"),
-                    PromptBehavior = promptBehavior
+                    ClientRedirectUri = new Uri("urn:ietf:wg:oauth:2.0:oob"),
+                    PromptBehavior = this.promptBehavior
                 };
 
                 var serviceSettings = ActiveDirectoryServiceSettings.Azure;
                 serviceSettings.TokenAudience = tokenAudience;
 
-                credentialsCache[tokenAudience] = await KvTokenProvider.LoginWithPromptAsync(this.TenantId, clientSettings, serviceSettings, TokenCache.DefaultShared);
+                this.credentialsCache[tokenAudience] = await KvTokenProvider.LoginWithPromptAsync(this.TenantId, clientSettings, serviceSettings, TokenCache.DefaultShared);
             }
 
-            await credentialsCache[tokenAudience].ProcessHttpRequestAsync(request, cancellationToken);
+            await this.credentialsCache[tokenAudience].ProcessHttpRequestAsync(request, cancellationToken);
         }
 
         public async Task<IAzure> BuildAzureClientAsync(string subscriptionName)
