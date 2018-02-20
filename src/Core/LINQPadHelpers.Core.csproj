@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Version.proj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="LINQPad" Version="5.26.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>

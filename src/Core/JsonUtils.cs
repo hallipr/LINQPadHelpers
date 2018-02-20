@@ -20,12 +20,15 @@ namespace LINQPadHelpers
                 MaxDepth = maxDepth
             };
         }
+        
+        public static T ReadJsonFile<T>(string path) => ReadJsonFile<T>(path, DefaultJsonSettings);
 
-        public static void WriteJsonFile(string path, object data, JsonSerializerSettings jsonSettings = null) => File.WriteAllText(path, JsonConvert.SerializeObject(data, jsonSettings ?? DefaultJsonSettings));
+        public static T ReadJsonFile<T>(string path, JsonSerializerSettings jsonSettings) => JsonConvert.DeserializeObject<T>(File.ReadAllText(path), jsonSettings);
 
-        public static T ReadJsonFile<T>(string path, JsonSerializerSettings jsonSettings = null) => JsonConvert.DeserializeObject<T>(File.ReadAllText(path), jsonSettings ?? DefaultJsonSettings);
+        public static void WriteJsonFile(string path, object data) => WriteJsonFile(path, data, DefaultJsonSettings);
 
-
+        public static void WriteJsonFile(string path, object data, JsonSerializerSettings jsonSettings) => File.WriteAllText(path, JsonConvert.SerializeObject(data, jsonSettings));
+        
         public static T DumpJson<T>(this T o)
         {
             return o.DumpJson(null, null);
