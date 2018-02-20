@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="Version.proj" />
 
   <PropertyGroup>
     <TargetFramework>net462</TargetFramework>
@@ -12,12 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="LINQPad" Version="5.26.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Users\pahallis\.nuget\packages\newtonsoft.json\10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
 </Project>
