@@ -67,7 +67,7 @@ namespace LINQPadHelpers
 
         public static bool Matches(this string input, string positivePattern, string negativePattern = null, RegexOptions options = RegexOptions.IgnoreCase)
         {
-            if(!Regex.IsMatch(input, positivePattern, options))
+            if(!string.IsNullOrEmpty(positivePattern) && !Regex.IsMatch(input, positivePattern, options))
             {
                 return false;
             }
