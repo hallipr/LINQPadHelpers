@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LINQPadHelpers
 {
     public static class Extensions
     {
-         public static string FormatDuration(this TimeSpan timespan)
+        public static string FormatDuration(this TimeSpan timespan)
         {
             var result = new StringBuilder("P");
 
@@ -62,6 +63,21 @@ namespace LINQPadHelpers
             {
                 yield return list.ToArray();
             }
+        }
+
+        public static bool Matches(this string input, string positivePattern, string negativePattern = null, RegexOptions options = RegexOptions.IgnoreCase)
+        {
+            if(!Regex.IsMatch(input, positivePattern, options))
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(negativePattern) && Regex.IsMatch(input, negativePattern, options))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
