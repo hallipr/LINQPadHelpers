@@ -1,3 +1,5 @@
+[![Build status](https://hallipr.visualstudio.com/CodeFist/_apis/build/status/LINQPadHelpers?branchName=master)](https://hallipr.visualstudio.com/CodeFist/_build/latest?definitionId=4)
+
 # LINQPadHelpers
 Niger libraries to remove some of my repetitive code from LINQPad scripts. 
 
