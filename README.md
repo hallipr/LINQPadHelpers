@@ -30,17 +30,6 @@ var results = await SomeMethodAsync()
 
 Task.Then will automatically await any returned task or IEnumerable<Task>
 
-All of the standard IEnunmerable<T> extension methods have been made Async. This is code gen'ed from .NET's Enumerable class with simple pass through parameters:
-
-```csharp
-public static async Task<IEnumerable<TResult>> SelectAsync<TSource, TResult>(
-    this Task<IEnumerable<TSource>> sourceTask, 
-    Func<TSource, TResult> selector)
-{
-    return await sourceTask.Then(source => source.Select(selector));
-}
-```
-
 ## [LINQPadHelpers.AzureRm](https://www.nuget.org/packages/LINQPadHelpers.AzureRm/)
 
 LINQPadHelpers.AzureRm simplifies the use of the Azure management NuGet libraries.  This work currently focuses on simplifying authentication:
