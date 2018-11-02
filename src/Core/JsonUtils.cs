@@ -6,6 +6,10 @@ using Newtonsoft.Json.Serialization;
 
 namespace LINQPadHelpers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json.Linq;
+
     public static class JsonUtils
     {
         private static readonly JsonSerializerSettings DefaultJsonSettings = BuildDefaultJsonSettings(null);
@@ -21,6 +25,32 @@ namespace LINQPadHelpers
             };
         }
         
+        public static Task<T> ReadJsonFileAsync<T>(string path) => ReadJsonFileAsync<T>(path, DefaultJsonSettings);
+
+        public static async Task<T> ReadJsonFileAsync<T>(string path, JsonSerializerSettings jsonSettings)
+        {
+            using (var textReader = File.OpenText(path))
+            using (var jsonReader = new JsonTextReader(textReader))
+            {
+                var jsonSerializer = JsonSerializer.Create(jsonSettings);
+                var token = await JToken.LoadAsync(jsonReader);
+                return token.ToObject<T>(jsonSerializer);
+            }
+        }
+
+        public static Task WriteJsonFileAsync(string path, object data) => WriteJsonFileAsync(path, data, DefaultJsonSettings);
+
+        public static async Task WriteJsonFileAsync(string path, object data, JsonSerializerSettings jsonSettings)
+        {
+            using (var stream = File.OpenWrite(path))
+            using (var textWriter = new StreamWriter(stream))
+            using (var jsonWriter = new JsonTextWriter(textWriter))
+            {
+                var jsonSerializer = JsonSerializer.Create(jsonSettings);
+                await JToken.FromObject(data, jsonSerializer).WriteToAsync(jsonWriter, jsonSerializer.Converters.ToArray());
+            }
+        }
+
         public static T ReadJsonFile<T>(string path) => ReadJsonFile<T>(path, DefaultJsonSettings);
 
         public static T ReadJsonFile<T>(string path, JsonSerializerSettings jsonSettings) => JsonConvert.DeserializeObject<T>(File.ReadAllText(path), jsonSettings);
